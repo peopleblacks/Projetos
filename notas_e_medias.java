@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-public class raiva {
+public class notas_e_medias {
     public static void main (String[] args){
 
 Scanner entrada = new Scanner(System.in);
