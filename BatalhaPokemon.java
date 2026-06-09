@@ -1,7 +1,9 @@
-// criar sistema de segurança pros valores, criar o resto das batalhas e o sistema random do bot do jogo
+// criar sistema de segurança pros valores, criar o resto das batalhas e passar a organizar os golpes por pokemon com array de array
+// além de criar o crítico e o super efetivo ( pra isso a tipagem)
+// 5 curar por btalha e fazer o sistema de protect turno sim turno não
 
 
-
+import java.util.Random;
 import java.util.Scanner;
 import java.lang.classfile.instruction.SwitchCase;
 import java.util.ArrayList;
@@ -12,6 +14,10 @@ public class BatalhaPokemon {
 public static void main (String[] args){
 
     Scanner entrada = new Scanner(System.in);
+    Random rng = new Random();
+
+
+
 
 int dano = 20;
 boolean podecurar = true;
@@ -37,29 +43,28 @@ System.out.println("Qual a vida do seu " + pokemon1  + " ? ");
 
 double vida_poke1 = entrada.nextInt();
 
+while ( vida_poke1 > 100 || vida_poke1 < 0){
+
+System.out.println("HP alto ( ou baixo) demais");
+
+vida_poke1 = entrada.nextInt();
+
+}
 System.out.println("Qual a vida do " + pokemon2  + " ? ");
 
 double vida_poke2 = entrada.nextInt();
 
+while ( vida_poke2 > 100 || vida_poke2 < 0){
+
+System.out.println("HP alto ( ou baixo) demais");
+
+vida_poke2 = entrada.nextInt();
+
+}
+
+
 vida_pokemons.add(vida_poke1);
 vida_pokemons.add(vida_poke2);
-
-if (vida_poke1> 100){
-
-System.out.println("Vida muito alta amigo, segura a onda aí");
-
-vida_poke1 = entrada.nextDouble();
-
-}
-
-if (vida_poke2 > 100){
-
-System.out.println("Vida muito alta amigo, segura a onda aí");
-
-vida_poke1 = entrada.nextDouble();
-
-
-}
 
 
 System.out.println("===== Agora é hora da batalha =====");
@@ -71,6 +76,7 @@ System.out.println("QUARTA AÇÃO --- FUGIR ----> Você foge da batalha igual a 
 
 System.out.println("_________ QUE COMEÇE A BATALHA________");
 
+do{
 System.out.println("Qual ação você vai realizar primeiro? ");
 System.out.println("BATER? (1)");
 System.out.println("CURAR? (2)");
@@ -95,7 +101,7 @@ switch (opcao_batalha) {
 
     case 3:
 
-    if (podecurar = true){
+    if (podecurar == true){
 
         podecurar = false;
         curouturnoanterior = true;
@@ -109,13 +115,43 @@ switch (opcao_batalha) {
     break;
     default:
         break;
-}
+    
+    }
+
+ System.out.println("Agora é o turno do oponente, qual opção ele vai escolher?");
+
+ int num_aleatorio = rng.nextInt(3) +1;
+
+ System.out.println("O seu oponente utilizou " + num_aleatorio);
+
+ if (num_aleatorio == 1){
+
+    vida_poke1-=dano;
+
+
+ } else if (num_aleatorio == 2){
+
+
+    vida_poke2 += 10;
+
+
+ } else if ( num_aleatorio == 3){
+
+if (podecurar = true){
+
+        podecurar = false;
+        curouturnoanterior = true;
+
+        vida_poke2 -=0;}
+
+ } 
 
 
 
 
+} while ( vida_poke1 !=0 || vida_poke2 != 0);
 
 
-
+entrada.close();
 }
 }
