@@ -20,22 +20,22 @@ public static void main (String[] args){
 
 
 int dano = 20;
-boolean podecurar = true;
-boolean curouturnoanterior = false;
+boolean protect_jogador = false;
+boolean protect_cpu = false;
 
 ArrayList<String> nome_pokemons = new ArrayList<>();
 ArrayList<Double> vida_pokemons = new ArrayList<>();
 
                 System.out.println("Qual o primeiro pokemon da batalha?");
 
-                String pokemon1 = entrada.nextLine();
+                String pokemon1 = entrada.nextLine().trim().toLowerCase();
 
                 nome_pokemons.add(pokemon1);
 
 
                 System.out.println("Qual o segundo pokemon da batalha?");
 
-                String pokemon2 = entrada.nextLine();
+                String pokemon2 = entrada.nextLine().trim().toLowerCase();
 
                 nome_pokemons.add(pokemon2);
 
@@ -56,7 +56,7 @@ double vida_poke2 = entrada.nextInt();
 
 while ( vida_poke2 > 100 || vida_poke2 < 0){
 
-System.out.println("HP alto ( ou baixo) demais");
+System.out.println("HP alto (ou baixo) demais");
 
 vida_poke2 = entrada.nextInt();
 
@@ -89,7 +89,9 @@ int opcao_batalha = entrada.nextInt();
 switch (opcao_batalha) {
     case 1:
         
-        vida_poke2-=dano;
+    if (protect_cpu != true){
+
+         vida_poke2 -=dano;}
 
         break;
 
@@ -101,13 +103,7 @@ switch (opcao_batalha) {
 
     case 3:
 
-    if (podecurar == true){
-
-        podecurar = false;
-        curouturnoanterior = true;
-
-        vida_poke1 -=0;}
-
+    protect_jogador = true;
 
        break;
     case 4:
@@ -126,7 +122,10 @@ switch (opcao_batalha) {
 
  if (num_aleatorio == 1){
 
+    if (protect_jogador != true ){
+
     vida_poke1-=dano;
+}
 
 
  } else if (num_aleatorio == 2){
@@ -137,19 +136,34 @@ switch (opcao_batalha) {
 
  } else if ( num_aleatorio == 3){
 
-if (podecurar = true){
+ protect_cpu = true;
 
-        podecurar = false;
-        curouturnoanterior = true;
+        }
 
-        vida_poke2 -=0;}
+ 
 
- } 
-
-
-
+    dano = 20;
+    protect_cpu = false;
+    protect_jogador = false;
+System.out.println(" A vid do seu: "+ pokemon1 + " é: " + vida_poke1);
+System.out.println("A vida do " + pokemon2 + " é: " + vida_poke2);
 
 } while ( vida_poke1 !=0 || vida_poke2 != 0);
+
+if ( vida_poke1 == 0){
+
+
+    System.out.println("VOCÊ PERDEU");
+}
+ else if (vida_poke2 == 0) {
+    
+
+    System.out.println(" VOCÊ GANHOU");
+} else {
+
+System.out.println("Eita, deu empate");
+
+}
 
 
 entrada.close();
